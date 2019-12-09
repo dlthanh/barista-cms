@@ -45,20 +45,28 @@ class UserController extends Controller
         return view('user.update', ['user' => $user]);
     }
 
-    public function postUpdate($id, UserRequest $request)
+    public function postUpdate($id, Request $request)
     {
         $password = $request->password;
-        if()
-        $user = [
-            'name' => $request->name,
-            'fullname' => $request->fullname,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'permission' => $request->permission
-        ];
+        if(User::find($id)->password == $password) {
+            $user = [
+                'name' => $request->name,
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'permission' => $request->permission
+            ];
+        } else {
+            $user = [
+                'name' => $request->name,
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'password' => bcrypt($password),
+                'permission' => $request->permission
+            ];
+        }
         $isUpdated = User::find($id)->update($user);
         if($isUpdated) {
-            return redirect()->route('user.getUpdate')
+            return redirect()->route('user.getUpdate', $id)
                 ->with('message', 'Cập nhật người dùng thành công')
                 ->with('user', $user);
         }
