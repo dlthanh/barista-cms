@@ -3,35 +3,27 @@
 @section('main-title', 'Thêm mới người dùng')
 
 @section('content')
-    @if(count($errors) > 0)
-        <ul class="user-form--error">
-            @foreach($errors->all() as $error)
-                <li>{!! $error !!}</li>
-            @endforeach
-        </ul>
-    @endif
-
     @if(session('message'))
         <div class="main-message ui green message">{{session('message')}}</div>
     @endif
 
-    <form action="{{route('user.postUpdate', $user->id)}}" method="POST" class="ui form">
+    <form action="{{route('user.postUpdate', $user->id)}}" method="POST" class="ui form" style="margin-bottom: 30px;">
         @csrf
 
         <div class="two fields">
             <div class="required field">
                 <label>Tên đăng nhập</label>
-                <input type="text" name="name" placeholder="Tên đăng nhập" required value="{{old('name', isset($user) ? $user->name : null)}}">
+                <input type="text" name="name" placeholder="Tên đăng nhập" required value="{{old('name', isset($user) ? $user->name : null)}}" disabled>
             </div>
 
             <div class="required field">
                 <label>Tên đầy đủ</label>
-                <input type="text" name="fullname" placeholder="Họ và tên" required value="{{old('fullname', isset($user) ? $user->fullname : null)}}">
+                <input type="text" name="fullname" placeholder="Họ và tên" required value="{{old('fullname', isset($user) ? $user->fullname : null)}}" disabled>
             </div>
 
             <div class="required field">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="Email" required value="{{old('email', isset($user) ? $user->email : null)}}">
+                <input type="email" name="email" placeholder="Email" required value="{{old('email', isset($user) ? $user->email : null)}}" disabled>
             </div>
         </div>
 
@@ -66,4 +58,12 @@
 
         <button type="submit" class="ui green button">Xác nhận</button>
     </form>
+
+    @if(count($errors) > 0)
+        <ul class="user-form--error">
+            @foreach($errors->all() as $error)
+                <li class="ui red message">{!! $error !!}</li>
+            @endforeach
+        </ul>
+    @endif
 @endsection

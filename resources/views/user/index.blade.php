@@ -45,7 +45,7 @@
                 </td>
                 <td>
                     @if($user->permission !== 0 && $user->permission !== 1)
-                        <a href="#">Xóa</a>
+                        <a href="{{route('user.delete', $user->id)}}">Xóa</a>
                     @endif
                 </td>
             </tr>

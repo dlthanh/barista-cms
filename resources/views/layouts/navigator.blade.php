@@ -18,7 +18,7 @@
         <a class="item">
             Thông tin khách hàng
         </a>
-        <a class="item" href="{{route('user.index')}}">
+        <a class="item {{request()->is('users*') ? 'active' : ''}}" href="{{route('user.index')}}">
             Người dùng
         </a>
     </div>

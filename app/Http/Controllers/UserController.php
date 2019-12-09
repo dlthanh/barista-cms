@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -42,33 +43,46 @@ class UserController extends Controller
     public function getUpdate($id)
     {
         $user = User::find($id);
+        if(!isset($user)) {
+            return redirect()->route('user.index')->with('message', 'Không tìm thấy người dùng có ID = '. $id);
+        }
         return view('user.update', ['user' => $user]);
     }
 
-    public function postUpdate($id, Request $request)
+    public function postUpdate($id, UserUpdateRequest $request)
     {
+        $data = User::find($id);
+        if(!isset($data)) {
+            return redirect()->route('user.index')->with('message', 'Không tìm thấy người dùng có ID = '. $id);
+        }
+
         $password = $request->password;
-        if(User::find($id)->password == $password) {
+        if($data->password == $password) {
             $user = [
-                'name' => $request->name,
-                'fullname' => $request->fullname,
-                'email' => $request->email,
                 'permission' => $request->permission
             ];
         } else {
             $user = [
-                'name' => $request->name,
-                'fullname' => $request->fullname,
-                'email' => $request->email,
                 'password' => bcrypt($password),
                 'permission' => $request->permission
             ];
         }
-        $isUpdated = User::find($id)->update($user);
+        $isUpdated = $data->update($user);
+
         if($isUpdated) {
             return redirect()->route('user.getUpdate', $id)
                 ->with('message', 'Cập nhật người dùng thành công')
                 ->with('user', $user);
         }
+    }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        if(!isset($user)) {
+            return redirect()->route('user.index')->with('message', 'Không tìm thấy người dùng có ID = '. $id);
+        }
+        $user->delete();
+        return redirect()->route('user.index')->with('message', 'Xóa thành công người dùng '. $user->name);
     }
 }

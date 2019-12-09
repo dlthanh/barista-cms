@@ -29,5 +29,6 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('/create', 'UserController@postCreate')->name('user.postCreate');
         Route::get('/{id}/update', 'UserController@getUpdate')->name('user.getUpdate');
         Route::post('{id}/update', 'UserController@postUpdate')->name('user.postUpdate');
+        Route::get('/{id}/delete', 'UserController@delete')->name('user.delete');
     });
 });
