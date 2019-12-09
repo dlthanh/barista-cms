@@ -1,0 +1,38 @@
+@import 'layouts/header';
+@import 'layouts/navigator';
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Geomanist', sans-serif;
+  font-weight: 400;
+  background-color: #f5f5f5;
+}
+.main {
+  display: flex;
+  max-height: calc(100vh - 50px);
+  overflow: hidden;
+  &-wrap {
+    padding: 30px;
+    flex: 1;
+    overflow: auto;
+  }
+  &-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  &-title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}
+
+// user page
