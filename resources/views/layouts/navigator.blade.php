@@ -9,11 +9,11 @@
         <a class="item">
             Tin tức
         </a>
-        <a class="item">
+        <a class="item {{request()->is('videos*') ? 'active' : ''}}" href="{{route('video.index')}}">
             Video
         </a>
         <a class="item">
-            Nhận xét của học viên
+            Lịch khai giảng
         </a>
         <a class="item">
             Thông tin khách hàng
