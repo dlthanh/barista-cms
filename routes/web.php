@@ -35,5 +35,10 @@ Route::group(['middleware' => 'auth'], function() {
     //Video Route
     Route::group(['prefix' => 'videos'], function() {
         Route::get('/', 'VideoController@index')->name('video.index');
+        Route::get('/create', 'VideoController@getCreate')->name('video.getCreate');
+        Route::post('/create', 'VideoController@postCreate')->name('video.postCreate');
+        Route::get('/{id}/update', 'VideoController@getUpdate')->name('video.getUpdate');
+        Route::post('{id}/update', 'VideoController@postUpdate')->name('video.postUpdate');
+        Route::get('/{id}/delete', 'VideoController@delete')->name('video.delete');
     });
 });

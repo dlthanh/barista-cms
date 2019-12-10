@@ -1,12 +1,14 @@
 @extends('layouts.master')
 
+@section('title', 'Thêm mới người dùng')
+
 @section('main-title', 'Thêm mới người dùng')
 
 @section('content')
     @if(count($errors) > 0)
         <ul class="user-form--error">
             @foreach($errors->all() as $error)
-                <li>{!! $error !!}</li>
+                <li class="ui red message">{!! $error !!}</li>
             @endforeach
         </ul>
     @endif

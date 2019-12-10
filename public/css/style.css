@@ -1,3 +1,36 @@
+.text.blue {
+  color: blue; }
+
+.text.green {
+  color: green; }
+
+.text.orange {
+  color: orange; }
+
+.text.pink {
+  color: pink; }
+
+.text.purple {
+  color: purple; }
+
+.text.red {
+  color: red; }
+
+.text.teal {
+  color: teal; }
+
+.text.yellow {
+  color: yellow; }
+
+.text.black {
+  color: black; }
+
+.text.grey {
+  color: grey; }
+
+.text.white {
+  color: white; }
+
 .header {
   height: 50px;
   line-height: 50px;
@@ -41,5 +74,8 @@ html, body {
   .main-title {
     font-size: 24px;
     font-weight: 700; }
+
+.notice {
+  margin-bottom: 30px; }
 
 /*# sourceMappingURL=style.css.map */

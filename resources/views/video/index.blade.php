@@ -1,9 +1,11 @@
 @extends('layouts.master')
 
+@section('title', 'Danh sách video')
+
 @section('main-title', 'Quản lý Video')
 
 @section('btn-group')
-    <a href="#" class="ui green button">Thêm video</a>
+    <a href="{{route('video.getCreate')}}" class="ui green button">Thêm video</a>
 @endsection
 
 @section('content')
@@ -35,10 +37,10 @@
                 </td>
                 <td class="middle aligned">{{$video->user->name}}</td>
                 <td class="middle aligned">
-                    <a href="#">Sửa</a>
+                    <a href="{{route('video.getUpdate', $video->id)}}">Sửa</a>
                 </td>
                 <td class="middle aligned">
-                    <a href="#">Xóa</a>
+                    <a href="{{route('video.delete', $video->id)}}">Xóa</a>
                 </td>
             </tr>
         @endforeach

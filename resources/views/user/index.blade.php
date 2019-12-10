@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Danh sách người dùng')
+
 @section('main-title', 'Quản lý người dùng')
 
 @section('btn-group')

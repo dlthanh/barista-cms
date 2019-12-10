@@ -1,6 +1,8 @@
 @extends('layouts.master')
 
-@section('main-title', 'Thêm mới người dùng')
+@section('title', 'Cập nhật người dùng')
+
+@section('main-title', 'Cập nhật người dùng')
 
 @section('content')
     @if(session('message'))
