@@ -1,5 +1,7 @@
 @extends('layouts.header')
 
+@section('title', 'Đăng nhập')
+
 @section('login')
     <div class="login">
         <div class="login-wrapper">

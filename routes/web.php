@@ -41,4 +41,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('{id}/update', 'VideoController@postUpdate')->name('video.postUpdate');
         Route::get('/{id}/delete', 'VideoController@delete')->name('video.delete');
     });
+
+    //Article Route
+    Route::group(['prefix' => 'articles'], function() {
+        Route::get('/', 'ArticleController@index')->name('article.index');
+    });
 });

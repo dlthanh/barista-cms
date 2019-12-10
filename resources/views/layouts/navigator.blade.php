@@ -6,7 +6,7 @@
         <a class="item">
             Khóa học
         </a>
-        <a class="item">
+        <a class="item {{request()->is('articles*') ? 'active' : ''}}" href="{{route('article.index')}}">
             Tin tức
         </a>
         <a class="item {{request()->is('videos*') ? 'active' : ''}}" href="{{route('video.index')}}">
