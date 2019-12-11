@@ -5,7 +5,7 @@
 @section('main-title', 'Quản lý tin tức')
 
 @section('btn-group')
-    <a href="#" class="ui green button">Thêm tin tức</a>
+    <a href="{{route('article.getCreate')}}" class="ui green button">Thêm tin tức</a>
 @endsection
 
 @section('content')

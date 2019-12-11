@@ -12,4 +12,8 @@ class ArticleController extends Controller
         $articles = Article::paginate(10);
         return view('article.index', ['articles' => $articles]);
     }
+    public function getCreate()
+    {
+        return view('article.create');
+    }
 }

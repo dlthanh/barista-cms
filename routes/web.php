@@ -45,5 +45,11 @@ Route::group(['middleware' => 'auth'], function() {
     //Article Route
     Route::group(['prefix' => 'articles'], function() {
         Route::get('/', 'ArticleController@index')->name('article.index');
+        Route::get('/create', 'ArticleController@getCreate')->name('article.getCreate');
+    });
+
+    //Media Route
+    Route::group(['prefix' => 'media'], function() {
+        Route::post('/single-upload', 'MediaController@single')->name('media.single');
     });
 });

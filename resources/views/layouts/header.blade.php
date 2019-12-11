@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('')}}css/fonts.css">
     <link rel="stylesheet" href="{{asset('')}}css/semantic.min.css">
     <link rel="stylesheet" href="{{asset('')}}css/semantic.custom.css">
+    @stack('stylesheet')
     @if(Auth()->check())
         <link rel="stylesheet" href="{{asset('')}}css/style.css">
     @else
