@@ -36,44 +36,27 @@
             <textarea name="description" rows="2">{{old('description')}}</textarea>
         </div>
 
-        <div class="two fields">
-            <div class="required field">
-                <label>Danh mục</label>
+        <div class="required field">
+            <label>Danh mục</label>
 
+            <div class="two fields">
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="permission" id="r1-1" value="1">
-                        <label for="r1-1">Review & Đánh giá</label>
+                        <input type="radio" name="permission" id="r1" value="1">
+                        <label for="r1">Review & Đánh giá</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="permission" id="r1-2" value="2">
-                        <label for="r1-2">Chia sẻ kinh nghiệm</label>
+                        <input type="radio" name="permission" id="r2" value="2">
+                        <label for="r2">Chia sẻ kinh nghiệm</label>
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="permission" id="r1-3" value="3">
-                        <label for="r1-3">Công thức pha chế</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="required field">
-                <label>Hiển thị ngoài trang chủ</label>
-
-                <div class="field">
-                    <div class="ui radio checkbox">
-                        <input type="radio" name="permission" id="r2-1" value="0">
-                        <label for="r2-1">Có</label>
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="ui radio checkbox">
-                        <input type="radio" name="permission" id="r2-2" value="1">
-                        <label for="r2-2">Không</label>
+                        <input type="radio" name="permission" id="r3" value="3">
+                        <label for="r3">Công thức pha chế</label>
                     </div>
                 </div>
             </div>
@@ -96,20 +79,38 @@
 @endpush
 
 @push('script')
-    <script src="{{asset('')}}medium-editor/js/jquery.ui.widget.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery.fileupload.js"></script>
     <script src="{{asset('')}}medium-editor/js/medium-editor.min.js"></script>
     <script src="{{asset('')}}medium-editor/js/handlebars.runtime.min.js"></script>
     <script src="{{asset('')}}medium-editor/js/jquery-sortable-min.js"></script>
+    <script src="{{asset('')}}medium-editor/js/jquery.ui.widget.js"></script>
+    <script src="{{asset('')}}medium-editor/js/jquery.fileupload.js"></script>
     <script src="{{asset('')}}medium-editor/js/medium-editor-insert-plugin.min.js"></script>
     <script>
         $(document).ready(function() {
             var articleContent = new MediumEditor('textarea[name="content"]');
             $(function () {
                 $('textarea[name="content"]').mediumInsert({
-                    editor: articleContent
+                    editor: articleContent,
+                    addons: {
+                        images: {
+                            fileUploadOptions: {
+                                url: '/media/medium-upload',
+                                singleFileUploads: true,
+                                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+                            },
+                            uploadCompleted: function($el, data) {
+                                console.log($el, data);
+                            },
+                            uploadFailed: function (uploadErrors, data) {
+                                console.log(uploadErrors, data)
+                            }
+                        },
+                        embeds: {
+                            oembedProxy: null
+                        }
+                    }
                 });
-            })
+            });
 
             $('#fileUpload').on('change', function() {
                 var fileUpload = $(this)[0].files[0];

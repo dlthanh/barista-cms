@@ -40,4 +40,25 @@ html, body {
   margin-bottom: 30px;
 }
 
+.medium-editor-element {
+  background-color: #fff;
+  max-width: 1010px;
+  margin: 0 auto;
+  padding: 0 15px 30px;
+  &::after {
+    padding-left: 15px!important;
+  }
+}
+.medium-insert-embeds {
+  figure {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+.video-youtube {
+  iframe {
+    width: 100% !important;
+  }
+}
+
 // user page

@@ -51,5 +51,6 @@ Route::group(['middleware' => 'auth'], function() {
     //Media Route
     Route::group(['prefix' => 'media'], function() {
         Route::post('/single-upload', 'MediaController@single')->name('media.single');
+        Route::post('/medium-upload', 'MediaController@medium')->name('media.medium');
     });
 });

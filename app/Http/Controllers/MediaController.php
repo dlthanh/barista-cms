@@ -18,4 +18,11 @@ class MediaController extends Controller
         }
         return response()->json(['message' => 'Có lỗi sảy ra khi upload ảnh'], 500);
     }
+
+    public function medium(Request $request) {
+        if($request->hasFile('files')) {
+            return $request->input('files')->getClientOriginalExtension();
+        }
+        return response()->json(['message' => 'Có lỗi sảy ra khi upload ảnh'], 500);
+    }
 }
