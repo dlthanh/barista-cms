@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'articles'], function() {
         Route::get('/', 'ArticleController@index')->name('article.index');
         Route::get('/create', 'ArticleController@getCreate')->name('article.getCreate');
+        Route::post('/create', 'ArticleController@postCreate')->name('article.postCreate');
     });
 
     //Media Route

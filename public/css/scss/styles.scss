@@ -45,8 +45,13 @@ html, body {
   max-width: 1010px;
   margin: 0 auto;
   padding: 0 15px 30px;
+  min-height: 80vh;
   &::after {
     padding-left: 15px!important;
+  }
+  p {
+    max-width: 660px;
+    margin: 0 auto;
   }
 }
 .medium-insert-embeds {

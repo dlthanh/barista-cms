@@ -42,20 +42,20 @@
             <div class="two fields">
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="permission" id="r1" value="1">
+                        <input type="radio" name="cat_id" id="r1" value="1">
                         <label for="r1">Review & Đánh giá</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="permission" id="r2" value="2">
+                        <input type="radio" name="cat_id" id="r2" value="2">
                         <label for="r2">Chia sẻ kinh nghiệm</label>
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="permission" id="r3" value="3">
+                        <input type="radio" name="cat_id" id="r3" value="3">
                         <label for="r3">Công thức pha chế</label>
                     </div>
                 </div>
@@ -66,6 +66,8 @@
             <label>Nội dung</label>
             <textarea name="content">{{old('content')}}</textarea>
         </div>
+
+        {{-- <input id="fileupload" type="file" name="files[]" multiple> --}}
 
         <button type="submit" class="ui green button">Xác nhận</button>
     </form>
@@ -83,6 +85,7 @@
     <script src="{{asset('')}}medium-editor/js/handlebars.runtime.min.js"></script>
     <script src="{{asset('')}}medium-editor/js/jquery-sortable-min.js"></script>
     <script src="{{asset('')}}medium-editor/js/jquery.ui.widget.js"></script>
+    <script src="{{asset('')}}medium-editor/js/jquery.iframe-transport.min.js"></script>
     <script src="{{asset('')}}medium-editor/js/jquery.fileupload.js"></script>
     <script src="{{asset('')}}medium-editor/js/medium-editor-insert-plugin.min.js"></script>
     <script>
@@ -94,16 +97,10 @@
                     addons: {
                         images: {
                             fileUploadOptions: {
+                                paramName: 'attachments[]',
                                 url: '/media/medium-upload',
-                                singleFileUploads: true,
-                                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+                                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
                             },
-                            uploadCompleted: function($el, data) {
-                                console.log($el, data);
-                            },
-                            uploadFailed: function (uploadErrors, data) {
-                                console.log(uploadErrors, data)
-                            }
                         },
                         embeds: {
                             oembedProxy: null

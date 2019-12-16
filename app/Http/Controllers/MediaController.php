@@ -20,8 +20,17 @@ class MediaController extends Controller
     }
 
     public function medium(Request $request) {
-        if($request->hasFile('files')) {
-            return $request->input('files')->getClientOriginalExtension();
+        if($request->hasFile('attachments')) {
+            $ext = $request->attachments[0]->getClientOriginalExtension();
+            $name = \Str::uuid();
+            $fileName = $name.'.'.$ext;
+            $request->attachments[0]->move(public_path('/uploads'), $fileName);
+            $image = Media::create(['filename' => $fileName]);
+            return response()->json([
+                'files' => [
+                    ['url' => 'http://cms.baristaskill.vn:8080/uploads/'.$fileName]
+                ]
+            ]);
         }
         return response()->json(['message' => 'Có lỗi sảy ra khi upload ảnh'], 500);
     }
