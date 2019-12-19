@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
-@section('title', 'Thêm mới tin tức')
+@section('title', 'Cập nhật tin tức')
 
-@section('main-title', 'Thêm mới tin tức')
+@section('main-title', 'Cập nhật tin tức')
 
 @section('content')
     @if(count($errors) > 0)
@@ -11,6 +11,10 @@
                 <li class="ui red message">{!! $error !!}</li>
             @endforeach
         </ul>
+    @endif
+
+    @if(session('message'))
+        <div class="main-message ui green message">{{session('message')}}</div>
     @endif
 
     <form action="" method="POST" class="ui form" accept="image/*" enctype="multipart/form-data">
@@ -23,17 +27,18 @@
             </div>
         </div>
         <div class="required field">
-            <input type="text" name="thumbnail" placeholder="Ảnh đại diện (trường không thể chỉnh sửa)" required value="{{old('thumbnail')}}" readonly>
+            <input type="text" name="thumbnail" placeholder="Ảnh đại diện (trường không thể chỉnh sửa)" required value="{{old('thumbnail', isset($article) ? $article->thumbnail : null)}}" readonly>
+            <img src="/uploads/{{$article->thumbnail}}" width="300">
         </div>
 
         <div class="required field">
             <label>Tiêu đề</label>
-            <input type="text" name="title" placeholder="Tiêu đề" required value="{{old('title')}}">
+            <input type="text" name="title" placeholder="Tiêu đề" required value="{{old('title', isset($article) ? $article->title : null)}}">
         </div>
 
         <div class="required field">
             <label>Mô tả</label>
-            <textarea name="description" rows="2">{{old('description')}}</textarea>
+            <textarea name="description" rows="2">{{old('description', isset($article) ? $article->description : null)}}</textarea>
         </div>
 
         <div class="required field">
@@ -42,20 +47,20 @@
             <div class="two fields">
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="cat_id" id="r1" value="1">
+                        <input type="radio" name="cat_id" id="r1" value="1" {{$article->cat_id == 1 ? 'checked' : ''}}>
                         <label for="r1">Review & Đánh giá</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="cat_id" id="r2" value="2">
+                        <input type="radio" name="cat_id" id="r2" value="2" {{$article->cat_id == 2 ? 'checked' : ''}}>
                         <label for="r2">Chia sẻ kinh nghiệm</label>
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="cat_id" id="r3" value="3">
+                        <input type="radio" name="cat_id" id="r3" value="3" {{$article->cat_id == 3 ? 'checked' : ''}}>
                         <label for="r3">Công thức pha chế</label>
                     </div>
                 </div>
@@ -64,7 +69,7 @@
 
         <div class="required field">
             <label>Nội dung</label>
-            <textarea name="content">{{old('content')}}</textarea>
+            <textarea name="content">{{old('content', isset($article) ? $article->content : null)}}</textarea>
         </div>
 
         {{-- <input id="fileupload" type="file" name="files[]" multiple> --}}

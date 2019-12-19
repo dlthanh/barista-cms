@@ -40,7 +40,7 @@
                     <a href="{{route('video.getUpdate', $video->id)}}">Sửa</a>
                 </td>
                 <td class="middle aligned">
-                    <a href="{{route('video.delete', $video->id)}}">Xóa</a>
+                    <a href="{{route('video.delete', $video->id)}}" class="delete-btn">Xóa</a>
                 </td>
             </tr>
         @endforeach

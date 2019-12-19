@@ -47,6 +47,29 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/', 'ArticleController@index')->name('article.index');
         Route::get('/create', 'ArticleController@getCreate')->name('article.getCreate');
         Route::post('/create', 'ArticleController@postCreate')->name('article.postCreate');
+        Route::get('/{id}/update', 'ArticleController@getUpdate')->name('article.getUpdate');
+        Route::post('{id}/update', 'ArticleController@postUpdate')->name('article.postUpdate');
+        Route::get('/{id}/delete', 'ArticleController@delete')->name('article.delete');
+    });
+
+    //Course Route
+    Route::group(['prefix' => 'courses'], function() {
+        Route::get('/', 'CourseController@index')->name('course.index');
+        Route::get('/create', 'CourseController@getCreate')->name('course.getCreate');
+        Route::post('/create', 'CourseController@postCreate')->name('course.postCreate');
+        Route::get('/{id}/update', 'CourseController@getUpdate')->name('course.getUpdate');
+        Route::post('{id}/update', 'CourseController@postUpdate')->name('course.postUpdate');
+        Route::get('/{id}/delete', 'CourseController@delete')->name('course.delete');
+    });
+
+    //Subject Route
+    Route::group(['prefix' => 'subjects'], function() {
+        Route::get('/', 'SubjectController@index')->name('subject.index');
+        Route::get('/create', 'SubjectController@getCreate')->name('subject.getCreate');
+        Route::post('/create', 'SubjectController@postCreate')->name('subject.postCreate');
+        Route::get('/{id}/update', 'SubjectController@getUpdate')->name('subject.getUpdate');
+        Route::post('{id}/update', 'SubjectController@postUpdate')->name('subject.postUpdate');
+        Route::get('/{id}/delete', 'SubjectController@delete')->name('subject.delete');
     });
 
     //Media Route

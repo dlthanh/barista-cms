@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
-@section('title', 'Thêm mới tin tức')
+@section('title', 'Thêm mới khóa học')
 
-@section('main-title', 'Thêm mới tin tức')
+@section('main-title', 'Thêm mới khóa học')
 
 @section('content')
     @if(count($errors) > 0)
@@ -32,43 +32,63 @@
         </div>
 
         <div class="required field">
+            <label>Quote</label>
+            <input type="text" name="quote" placeholder="Quote" required value="{{old('quote')}}">
+        </div>
+
+        <div class="required field">
             <label>Mô tả</label>
             <textarea name="description" rows="2">{{old('description')}}</textarea>
         </div>
 
         <div class="required field">
-            <label>Danh mục</label>
+            <label>Giá tiền</label>
+            <input type="text" name="price" placeholder="Giá tiền" required value="{{old('price')}}">
+        </div>
+
+        <div class="required field">
+            <label>Số buổi học</label>
+            <input type="text" name="session" placeholder="Số buổi học" required value="{{old('session')}}">
+        </div>
+
+        <div class="required field">
+            <label>Thời gian học / 1 buổi</label>
+            <input type="text" name="time" placeholder="Thời gian học" required value="{{old('time')}}">
+        </div>
+
+        <div class="required field">
+            <label>Video</label>
+            <input type="text" name="video" placeholder="Video" required value="{{old('video')}}">
+        </div>
+
+        <div class="required field">
+            <label>Hiển thị trang chủ</label>
 
             <div class="two fields">
                 <div class="field">
                     <div class="ui radio checkbox">
                         <input type="radio" name="cat_id" id="r1" value="1">
-                        <label for="r1">Review & Đánh giá</label>
+                        <label for="r1">Có</label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio checkbox">
-                        <input type="radio" name="cat_id" id="r2" value="2">
-                        <label for="r2">Chia sẻ kinh nghiệm</label>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="ui radio checkbox">
-                        <input type="radio" name="cat_id" id="r3" value="3">
-                        <label for="r3">Công thức pha chế</label>
+                        <input type="radio" name="cat_id" id="r2" value="0">
+                        <label for="r2">Không</label>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="required field">
-            <label>Nội dung</label>
-            <textarea name="content">{{old('content')}}</textarea>
+        @for($i = 0; $i < 30; $i++)
+        <div class="required field" style="{{$i != 0 ? 'display:none' : ''}}">
+            <label>Buổi số {{$i + 1}}</label>
+            <input type="text" name="content[{{$i}}][title]" placeholder="Tiêu đề buổi học" required value="{{old('content['.$i.'][title]')}}">
+            <textarea name="content[{{$i}}][content]" rows="4" placeholder="Nội dung buổi học">{{old('content['.$i.'][content]')}}</textarea>
         </div>
+        @endfor
 
-        {{-- <input id="fileupload" type="file" name="files[]" multiple> --}}
-
+        <button type="button" class="ui green button">Thêm trường buổi học</button>
         <button type="submit" class="ui green button">Xác nhận</button>
     </form>
 @endsection
@@ -90,25 +110,6 @@
     <script src="{{asset('')}}medium-editor/js/medium-editor-insert-plugin.min.js"></script>
     <script>
         $(document).ready(function() {
-            var articleContent = new MediumEditor('textarea[name="content"]');
-            $(function () {
-                $('textarea[name="content"]').mediumInsert({
-                    editor: articleContent,
-                    addons: {
-                        images: {
-                            fileUploadOptions: {
-                                paramName: 'attachments[]',
-                                url: '/media/medium-upload',
-                                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                            },
-                        },
-                        embeds: {
-                            oembedProxy: null
-                        }
-                    }
-                });
-            });
-
             $('#fileUpload').on('change', function() {
                 var fileUpload = $(this)[0].files[0];
                 var formData = new FormData();
@@ -128,6 +129,12 @@
                     },
                 })
             });
+
+            var index = 0;
+            $('button[type="button"]').click(function() {
+                index++
+                $('[name="content[' + index +'][content]"]').parent('.field').show();
+            })
         })
     </script>
 @endpush

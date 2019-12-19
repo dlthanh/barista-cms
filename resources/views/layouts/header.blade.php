@@ -22,6 +22,10 @@
     <script>
         $(document).ready(function() {
             $('.ui.dropdown').dropdown();
+
+            $('.delete-btn').click(function() {
+                return confirm('Bạn có xác định muốn xóa trường này');
+            });
         })
     </script>
     @stack('script')

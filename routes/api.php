@@ -19,4 +19,9 @@ Route::group(['namespace' => 'Api'], function() {
         Route::get('/', 'VideoController@index');
         Route::get('/{id}', 'VideoController@detail');
     });
+
+    //Course Route
+    Route::group(['prefix' => 'courses'], function() {
+        Route::get('/{month}/{year}', 'CourseController@detail');
+    });
 });

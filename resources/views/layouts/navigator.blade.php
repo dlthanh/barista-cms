@@ -3,7 +3,7 @@
         <a class="item {{request()->is('/') ? 'active' : ''}}">
             Bảng điều khiển
         </a>
-        <a class="item">
+        <a class="item {{request()->is('subjects*') ? 'active' : ''}}" href="{{route('subject.index')}}">
             Khóa học
         </a>
         <a class="item {{request()->is('articles*') ? 'active' : ''}}" href="{{route('article.index')}}">
@@ -12,7 +12,7 @@
         <a class="item {{request()->is('videos*') ? 'active' : ''}}" href="{{route('video.index')}}">
             Video
         </a>
-        <a class="item">
+        <a class="item {{request()->is('courses*') ? 'active' : ''}}" href="{{route('course.index')}}">
             Lịch khai giảng
         </a>
         <a class="item">

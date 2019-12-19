@@ -42,9 +42,9 @@ html, body {
 
 .medium-editor-element {
   background-color: #fff;
-  max-width: 1010px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 0 15px 30px;
+  padding-bottom: 30px;
   min-height: 80vh;
   &::after {
     padding-left: 15px!important;
@@ -52,9 +52,15 @@ html, body {
   p {
     max-width: 660px;
     margin: 0 auto;
+    margin-bottom: 30px;
   }
 }
+.medium-insert-images {
+  margin-top: 0;
+  margin-bottom: 30px;
+}
 .medium-insert-embeds {
+  margin-bottom: 30px;
   figure {
     margin-left: 0;
     margin-right: 0;

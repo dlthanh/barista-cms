@@ -29,7 +29,7 @@
         @foreach($articles as $article)
             <tr>
                 <td class="middle aligned">{{$article->id}}</td>
-                <td class="middle aligned"><img src="{{$article->thumbnail}}" alt="" width="80"></td>
+                <td class="middle aligned"><img src="/uploads/{{$article->thumbnail}}" alt="" width="80"></td>
                 <td class="middle aligned">{{$article->title}}</td>
                 <td class="middle aligned">{{$article->description}}</td>
                 <td class="middle aligned">
@@ -43,10 +43,10 @@
                 </td>
                 <td class="middle aligned">{{$article->user->name}}</td>
                 <td class="middle aligned">
-                    <a href="#">Sửa</a>
+                    <a href="{{route('article.getUpdate', $article->id)}}">Sửa</a>
                 </td>
                 <td class="middle aligned">
-                    <a href="#">Xóa</a>
+                    <a href="{{route('article.delete', $article->id)}}" class="delete-btn">Xóa</a>
                 </td>
             </tr>
         @endforeach
