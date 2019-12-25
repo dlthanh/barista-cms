@@ -67,6 +67,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('/create', 'SubjectController@postCreate')->name('subject.postCreate');
         Route::get('/{id}/update', 'SubjectController@getUpdate')->name('subject.getUpdate');
         Route::post('{id}/update', 'SubjectController@postUpdate')->name('subject.postUpdate');
+        Route::get('/{id}/update/step2', 'SubjectController@getStep2')->name('subject.getUpdate.step2');
+        Route::post('{id}/update/step2', 'SubjectController@postStep2')->name('subject.postUpdate.step2');
         Route::get('/{id}/delete', 'SubjectController@delete')->name('subject.delete');
     });
 

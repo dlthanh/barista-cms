@@ -4,3 +4,8 @@ $text-colors: blue, green, orange, pink, purple, red, teal, yellow, black, grey,
     color: #{$tc};
   }
 }
+
+input, textarea {
+  font-family: 'Geomanist', sans-serif!important;
+  font-weight: 400;
+}

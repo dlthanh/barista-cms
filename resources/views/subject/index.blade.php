@@ -20,16 +20,18 @@
                 <th>Tên khóa học</th>
                 <th>Giá tiền</th>
                 <th>Số buổi</th>
+                <th>Trạng thái</th>
                 <th colspan="2">Hành động</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($subjects as $article)
+        @foreach($subjects as $subject)
             <tr>
                 <td class="middle aligned">{{$subject->id}}</td>
-                <td class="middle aligned">{{$subject->title}}"</td>
+                <td class="middle aligned">{{$subject->title}}</td>
                 <td class="middle aligned">{{$subject->price}}</td>
                 <td class="middle aligned">{{$subject->session}}</td>
+                <td class="middle aligned">{{$subject->isActive ? 'Đã hoàn thành' : 'Chưa hoàn thành'}}</td>
                 <td class="middle aligned">
                     <a href="{{route('subject.getUpdate', $subject->id)}}">Sửa</a>
                 </td>

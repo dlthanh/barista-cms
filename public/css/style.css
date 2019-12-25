@@ -42,6 +42,11 @@
 .text.white {
   color: white; }
 
+/* line 8, scss/_commons.scss */
+input, textarea {
+  font-family: "Geomanist", sans-serif !important;
+  font-weight: 400; }
+
 /* line 1, scss/layouts/_header.scss */
 .header {
   height: 50px;
@@ -69,7 +74,7 @@
 
 /* line 13, scss/styles.scss */
 html, body {
-  font-family: 'Geomanist', sans-serif;
+  font-family: "Geomanist", sans-serif !important;
   font-weight: 400;
   background-color: #f5f5f5; }
 
@@ -140,5 +145,25 @@ html, body {
 /* line 70, scss/styles.scss */
 .video-youtube iframe {
   width: 100% !important; }
+
+/* line 75, scss/styles.scss */
+#description,
+[content-id] {
+  margin: 0;
+  -webkit-appearance: none;
+  tap-highlight-color: rgba(255, 255, 255, 0);
+  padding: .78571429em 1em;
+  background: #fff;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  outline: 0;
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: .28571429rem;
+  -webkit-box-shadow: 0 0 0 0 transparent inset;
+  box-shadow: 0 0 0 0 transparent inset;
+  -webkit-transition: color .1s ease,border-color .1s ease;
+  transition: color .1s ease,border-color .1s ease;
+  font-size: 1em;
+  line-height: 1.2857;
+  resize: vertical; }
 
 /*# sourceMappingURL=style.css.map */
