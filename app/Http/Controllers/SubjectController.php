@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subject;
+use App\Models\Teacher;
 
 class SubjectController extends Controller
 {
@@ -30,29 +31,29 @@ class SubjectController extends Controller
 
     public function getUpdate($id)
     {
-        // $course = Course::find($id);
-        // if(!isset($course)) {
-        //     return redirect()->route('course.index')->with('message', 'Không tìm thấy lịch khai giảng có ID = '. $id);
-        // }
-        // return view('course.update', ['course' => $course]);
+        $subject = Subject::find($id);
+        if(!isset($subject)) {
+            return redirect()->route('subject.index')->with('message', 'Không tìm thấy khóa học có ID = '. $id);
+        }
+        return view('subject.update', ['subject' => $subject]);
     }
 
     public function postUpdate($id, Request $request)
     {   
-        // $data = Course::find($id);
-        // if(!isset($data)) {
-        //     return redirect()->route('article.index')->with('message', 'Không tìm thấy lịch khai giảng có ID = '. $id);
-        // }
+        $data = Subject::find($id);
+        if(!isset($data)) {
+            return redirect()->route('subject.index')->with('message', 'Không tìm thấy khóa học có ID = '. $id);
+        }
 
-        // $course = $request->all();
+        $subject = $request->all();
 
-        // $isUpdated = $data->update($course);
+        $isUpdated = $data->update($subject);
 
-        // if($isUpdated) {
-        //     return redirect()->route('course.getUpdate', $id)
-        //         ->with('message', 'Cập nhật lịch khai giảng thành công')
-        //         ->with('course', $course);
-        // }
+        if($isUpdated) {
+            return redirect()->route('subject.getUpdate', $id)
+                ->with('message', 'Cập nhật khóa học thành công')
+                ->with('subject', $subject);
+        }
     }
 
     public function getStep2($id)
@@ -79,13 +80,61 @@ class SubjectController extends Controller
         }
     }
 
+    public function getStep3($id)
+    {
+        $subject = Subject::find($id);
+        if(!isset($subject)) {
+            return redirect()->route('subject.index')->with('message', 'Không tìm thấy khóa học có ID = '. $id);
+        }
+        return view('subject.step3', ['subject' => $subject]);
+    }
+
+    public function postStep3($id, Request $request)
+    {
+        $data = Subject::find($id);
+        if(!isset($data)) {
+            return redirect()->route('subject.index')->with('message', 'Không tìm thấy khóa học có ID = '. $id);
+        }
+        
+        $isUpdated = $data->update([
+            'content' => $request->content,
+            'isActive' => 1
+        ]);
+
+        if($isUpdated) {
+            $subject = Subject::find($id);
+            return redirect()->route('subject.getUpdate.step4', $subject->id)->with('subject', $subject);
+        }
+    }
+
+    public function getStep4($id)
+    {
+        $subject = Subject::find($id);
+        if(!isset($subject)) {
+            return redirect()->route('subject.index')->with('message', 'Không tìm thấy khóa học có ID = '. $id);
+        }
+        $teachers = Teacher::all();
+        return view('subject.step4', ['subject' => $subject, 'teachers' => $teachers]);
+    }
+
+    public function postStep4($id, Request $request)
+    {
+        $subject = Subject::find($id);
+        if(!isset($subject)) {
+            return redirect()->route('subject.index')->with('message', 'Không tìm thấy khóa học có ID = '. $id);
+        }
+
+        $subject->teachers()->sync($request->teacher_id);
+        return view('subject.update', ['message' => 'Cập nhập khóa học thành công']);
+    }
+
     public function delete($id)
     {
-        // $course = Course::find($id);
-        // if(!isset($course)) {
-        //     return redirect()->route('course.index')->with('message', 'Không tìm thấy lịch khai giảng có ID = '. $id);
-        // }
-        // $course->delete();
-        // return redirect()->route('course.index')->with('message', 'Xóa thành công lịch khai giảng "'. $course->label . '"');
+        $subject = Subject::find($id);
+        if(!isset($subject)) {
+            return redirect()->route('teacher.index')->with('message', 'Không tìm thấy khóa học có ID = '. $id);
+        }
+        $subject->delete();
+        return redirect()->route('teacher.index')->with('message', 'Xóa thành công khóa học "'. $subject->title . '"');
     }
 }

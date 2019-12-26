@@ -13,4 +13,14 @@ class Subject extends Model
     protected $casts = [
         'content' => 'array'
     ];
+
+    public function media()
+    {
+        return $this->hasMany('App\Models\Media');
+    }
+
+    public function teachers()
+    {
+        return $this->belongsToMany('App\Models\Teacher', 'teacher_subject');
+    }
 }

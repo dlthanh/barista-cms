@@ -15,7 +15,8 @@
 
     <div class="ui top attached tabular menu">
         <a class="item" href="{{route('subject.getUpdate', $subject->id)}}">Thông tin cơ bản</a>
-        <a class="item active">Chi tiết buổi học</a>
+        <a class="item active">Media</a>
+        <a class="item" href="{{route('subject.getUpdate.step3', $subject->id)}}">Chi tiết buổi học</a>
         <a class="item">Giảng viên</a>
     </div>
 
@@ -23,53 +24,86 @@
         <form action="" method="POST" class="ui form" accept="image/*" enctype="multipart/form-data">
             @csrf
     
-            @for($i = 0; $i < $subject->session; $i++)
             <div class="required field">
-                <label>Buổi {{$i + 1}}</label>
-                <input type="text" name="content[{{$i}}][title]" placeholder="Tiêu đề buổi học" required value="{{old('content['.$i.'][title]', isset($subject) ? $subject->content[$i]['title'] : null)}}">
-                <br />
-                <br />
-                <textarea name="content[{{$i}}][content]" rows="4" placeholder="Nội dung buổi học" hidden>{{old('content['.$i.'][content]', isset($subject) ? $subject->content[$i]['content'] : null)}}</textarea>
+                <label>Video</label>
+                <input type="text" name="video" placeholder="Video" required value="{{old('video', isset($subject->video) ? $subject->video : null)}}">
+            </div>
 
-                <div contenteditable="true" content-id="{{$i}}" name="content">
-                    {!! old('content['.$i.'][content]', isset($subject) ? $subject->content[$i]['content'] : null) !!}
+            <div class="two fields">
+                <div class="required field">
+                    <label>Gallery (Thêm nhiều ảnh)</label>
+                    <input type="file" id="fileUpload" placeholder="Gallery" multiple>
+                </div>
+
+                <div class="field">
+                    <label>Thêm một ảnh</label>
+                    <input type="file" id="singleUpload" placeholder="Thêm ảnh vào gallery" multiple>
                 </div>
             </div>
-            @endfor
+
+            <div id="gallery">
+                @foreach($subject->media as $media)
+                    <div class="item" data-id="{{$media->id}}">
+                        <img src="/uploads/{{$media->filename}}" alt="">
+                        <a href="javascript:void(0);" class="del-img">Xóa ảnh</a>
+                    </div>
+                @endforeach
+            </div>
     
             <button type="submit" class="ui green button">Xác nhận</button>
         </form>
     </div>
 @endsection
 
-@push('stylesheet')
-    <link rel="stylesheet" href="{{asset('')}}fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{asset('')}}medium-editor/css/medium-editor.min.css">
-    <link rel="stylesheet" href="{{asset('')}}medium-editor/css/themes/beagle.min.css">
-    <link rel="stylesheet" href="{{asset('')}}medium-editor/css/medium-editor-insert-plugin.min.css">
-@endpush
-
 @push('script')
-    <script src="{{asset('')}}medium-editor/js/medium-editor.min.js"></script>
-    <script src="{{asset('')}}medium-editor/js/handlebars.runtime.min.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery-sortable-min.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery.ui.widget.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery.iframe-transport.min.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery.fileupload.js"></script>
-    <script src="{{asset('')}}medium-editor/js/medium-editor-insert-plugin.min.js"></script>
     <script>
         $(document).ready(function() {
-            var editors = document.getElementsByName('content');
-            $.each(editors, function(index, editor) {
-                editor.designMode = 'on';
-                editor.addEventListener('keypress', function(e) {
-                    if(e.key == "Enter" || e.keyCode == 13 || e.which == 13) {
-                        document.execCommand('formatBlock', false, 'p')
-                    }
-                    $(editor).prev().val(editor.innerHTML);
+            $('#fileUpload').on('change', function() {
+                var filesUpload = $(this)[0].files;
+                $.each(filesUpload, function(index, fileUpload) {
+                    var formData = new FormData();
+                    formData.append('file', fileUpload);
+                    formData.append('subject_id', {{$subject->id}})
+                    $.ajax({
+                        type: 'POST',
+                        url: '/media/gallery-upload',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success:function(response){
+                            $('<div class="item"><img src="/uploads/' + response.filename + '"><a href="javascript:void(0);" class="del-img">Xóa ảnh</a></div>').appendTo('#gallery');
+                        },
+                    })
                 })
-                editor.addEventListener('keyup', function(e) {
-                    $(editor).prev().val(editor.innerHTML);
+            });
+
+            $('#singleUpload').on('change', function() {
+                var fileUpload = $(this)[0].files[0];
+                var formData = new FormData();
+                formData.append('file', fileUpload);
+                formData.append('subject_id', {{$subject->id}})
+                $.ajax({
+                    type: 'POST',
+                    url: '/media/gallery-upload',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success:function(response){
+                        $('<div class="item" data-id="' + response.id + '"><img src="/uploads/' + response.filename + '"><a href="javascript:void(0);" class="del-img">Xóa ảnh</a></div>').appendTo('#gallery');
+                        $('#singleUpload').val(null);
+                    },
+                })
+            });
+
+            $('#gallery').on('click', '.del-img', function(e) {
+                var imgId = $(this).parents('.item').attr('data-id');
+                $.ajax({
+                    type: 'POST',
+                    url: '/media/delete',
+                    data: {id: imgId},
+                    success:function(response){
+                        $('#gallery .item[data-id="'+ imgId +'"]').remove();
+                    },
                 })
             })
         })

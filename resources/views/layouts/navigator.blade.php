@@ -15,6 +15,9 @@
         <a class="item {{request()->is('courses*') ? 'active' : ''}}" href="{{route('course.index')}}">
             Lịch khai giảng
         </a>
+        <a class="item {{request()->is('teachers*') ? 'active' : ''}}" href="{{route('teacher.index')}}">
+            Giảng viên
+        </a>
         <a class="item">
             Thông tin khách hàng
         </a>

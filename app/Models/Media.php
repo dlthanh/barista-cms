@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Media extends Model
 {
     protected $fillable = [
-        'filename'
+        'filename', 'subject_id'
     ];
+
+    public function subject()
+    {
+        return $this->belongsTo('App\Models\Subject');
+    }
 }

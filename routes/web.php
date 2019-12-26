@@ -69,12 +69,28 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('{id}/update', 'SubjectController@postUpdate')->name('subject.postUpdate');
         Route::get('/{id}/update/step2', 'SubjectController@getStep2')->name('subject.getUpdate.step2');
         Route::post('{id}/update/step2', 'SubjectController@postStep2')->name('subject.postUpdate.step2');
+        Route::get('/{id}/update/step3', 'SubjectController@getStep3')->name('subject.getUpdate.step3');
+        Route::post('{id}/update/step3', 'SubjectController@postStep3')->name('subject.postUpdate.step3');
+        Route::get('/{id}/update/step4', 'SubjectController@getStep4')->name('subject.getUpdate.step4');
+        Route::post('{id}/update/step4', 'SubjectController@postStep4')->name('subject.postUpdate.step4');
         Route::get('/{id}/delete', 'SubjectController@delete')->name('subject.delete');
     });
 
     //Media Route
     Route::group(['prefix' => 'media'], function() {
         Route::post('/single-upload', 'MediaController@single')->name('media.single');
+        Route::post('/gallery-upload', 'MediaController@gallery')->name('media.gallery');
         Route::post('/medium-upload', 'MediaController@medium')->name('media.medium');
+        Route::post('/delete', 'MediaController@delete')->name('media.delete');
+    });
+
+    //Teacher Route
+    Route::group(['prefix' => 'teachers'], function() {
+        Route::get('/', 'TeacherController@index')->name('teacher.index');
+        Route::get('/create', 'TeacherController@getCreate')->name('teacher.getCreate');
+        Route::post('/create', 'TeacherController@postCreate')->name('teacher.postCreate');
+        Route::get('/{id}/update', 'TeacherController@getUpdate')->name('teacher.getUpdate');
+        Route::post('{id}/update', 'TeacherController@postUpdate')->name('teacher.postUpdate');
+        Route::get('/{id}/delete', 'TeacherController@delete')->name('teacher.delete');
     });
 });

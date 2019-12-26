@@ -91,3 +91,17 @@ html, body {
   line-height: 1.2857;
   resize: vertical;
 }
+
+#gallery {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  .item {
+    max-width: 300px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    img {
+      width: 100%;
+    }
+  }
+}

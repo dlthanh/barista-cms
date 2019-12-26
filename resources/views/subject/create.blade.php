@@ -15,6 +15,7 @@
 
     <div class="ui top attached tabular menu">
         <a class="item active">Thông tin cơ bản</a>
+        <a class="item" disabled>Media</a>
         <a class="item" disabled>Chi tiết buổi học</a>
         <a class="item" disabled>Giảng viên</a>
     </div>
@@ -59,11 +60,6 @@
                 <div class="required field">
                     <label>Thời gian học / 1 buổi</label>
                     <input type="text" name="time" placeholder="Thời gian học" required value="{{old('time')}}">
-                </div>
-
-                <div class="required field">
-                    <label>Video</label>
-                    <input type="text" name="video" placeholder="Video" required value="{{old('video')}}">
                 </div>
 
                 <div class="required field">
@@ -112,21 +108,7 @@
     </div>
 @endsection
 
-@push('stylesheet')
-    <link rel="stylesheet" href="{{asset('')}}fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{asset('')}}medium-editor/css/medium-editor.min.css">
-    <link rel="stylesheet" href="{{asset('')}}medium-editor/css/themes/beagle.min.css">
-    <link rel="stylesheet" href="{{asset('')}}medium-editor/css/medium-editor-insert-plugin.min.css">
-@endpush
-
 @push('script')
-    <script src="{{asset('')}}medium-editor/js/medium-editor.min.js"></script>
-    <script src="{{asset('')}}medium-editor/js/handlebars.runtime.min.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery-sortable-min.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery.ui.widget.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery.iframe-transport.min.js"></script>
-    <script src="{{asset('')}}medium-editor/js/jquery.fileupload.js"></script>
-    <script src="{{asset('')}}medium-editor/js/medium-editor-insert-plugin.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#fileUpload').on('change', function() {
