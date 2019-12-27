@@ -10,10 +10,11 @@ class CourseController extends Controller
 {
     public function detail($month, $year)
     {
-        $courses = Course::where([
-            ['month', '=', $month],
-            ['year', '=', $year]
-        ])->get()->toArray();
+        $nextMonth = $month == 12 ? 1 : $month + 1;
+        $year = $month == 12 ? [$year, $year + 1] : [$year];
+        $courses = Course::whereIn('month', [$month, $nextMonth])
+            ->whereIn('year', $year)
+            ->get()->toArray();
         
         $data = [];
         foreach($courses as $course) {
