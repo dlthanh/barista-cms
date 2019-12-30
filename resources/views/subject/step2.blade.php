@@ -17,7 +17,7 @@
         <a class="item" href="{{route('subject.getUpdate', $subject->id)}}">Thông tin cơ bản</a>
         <a class="item active">Media</a>
         <a class="item" href="{{route('subject.getUpdate.step3', $subject->id)}}">Chi tiết buổi học</a>
-        <a class="item">Giảng viên</a>
+        <a class="item" href="{{route('subject.getUpdate.step4', $subject->id)}}">Giảng viên</a>
     </div>
 
     <div class="ui bottom attached segment">
