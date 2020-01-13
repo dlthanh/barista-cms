@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\Teacher;
+use App\Http\Requests\SubjectRequest;
 
 class SubjectController extends Controller
 {
@@ -19,7 +20,7 @@ class SubjectController extends Controller
         return view('subject.create');
     }
 
-    public function postCreate(Request $request)
+    public function postCreate(SubjectRequest $request)
     {
         $data = $request->all();
         $data['isActive'] = 0;
@@ -38,7 +39,7 @@ class SubjectController extends Controller
         return view('subject.update', ['subject' => $subject]);
     }
 
-    public function postUpdate($id, Request $request)
+    public function postUpdate($id, SubjectRequest $request)
     {   
         $data = Subject::find($id);
         if(!isset($data)) {

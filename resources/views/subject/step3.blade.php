@@ -27,13 +27,13 @@
             @for($i = 0; $i < $subject->session; $i++)
             <div class="required field">
                 <label>Buổi {{$i + 1}}</label>
-                <input type="text" name="content[{{$i}}][title]" placeholder="Tiêu đề buổi học" required value="{{old('content['.$i.'][title]', isset($subject) ? $subject->content[$i]['title'] : null)}}">
+                <input type="text" name="content[{{$i}}][title]" placeholder="Tiêu đề buổi học" required value="{{old('content['.$i.'][title]', isset($subject) && isset($subject->content[$i]) ? $subject->content[$i]['title'] : null)}}">
                 <br />
                 <br />
-                <textarea name="content[{{$i}}][content]" rows="4" placeholder="Nội dung buổi học" hidden>{{old('content['.$i.'][content]', isset($subject) ? $subject->content[$i]['content'] : null)}}</textarea>
+                <textarea name="content[{{$i}}][content]" rows="4" placeholder="Nội dung buổi học" hidden>{{old('content['.$i.'][content]', isset($subject) && isset($subject->content[$i]) ? $subject->content[$i]['content'] : null)}}</textarea>
 
                 <div contenteditable="true" content-id="{{$i}}" name="content">
-                    {!! old('content['.$i.'][content]', isset($subject) ? $subject->content[$i]['content'] : null) !!}
+                    {!! old('content['.$i.'][content]', isset($subject) && isset($subject->content[$i]) ? $subject->content[$i]['content'] : null) !!}
                 </div>
             </div>
             @endfor

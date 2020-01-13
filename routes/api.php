@@ -47,4 +47,9 @@ Route::group(['namespace' => 'Api'], function() {
     Route::group(['prefix' => 'media'], function() {
         Route::get('/subject/{id}', 'MediaController@subject');
     });
+
+    //Customer Route
+    Route::group(['prefix' => 'customer'], function() {
+        Route::post('/', 'CustomerController@post');
+    });
 });

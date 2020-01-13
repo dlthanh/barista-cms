@@ -93,4 +93,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('{id}/update', 'TeacherController@postUpdate')->name('teacher.postUpdate');
         Route::get('/{id}/delete', 'TeacherController@delete')->name('teacher.delete');
     });
+
+    //Customer Route
+    Route::group(['prefix' => 'customers'], function() {
+        Route::get('/', 'CustomerController@index')->name('customer.index');
+    });
 });

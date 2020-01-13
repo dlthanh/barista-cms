@@ -127,6 +127,7 @@
                             $('input[name="thumbnail"]').next().remove();
                         }
                         $('input[name="thumbnail"]').after('<img src="/uploads/' + response.filename + '" width="300">')
+                        $('#fileUpload').val('');
                     },
                 })
             });

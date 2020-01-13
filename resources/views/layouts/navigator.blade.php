@@ -18,7 +18,7 @@
         <a class="item {{request()->is('teachers*') ? 'active' : ''}}" href="{{route('teacher.index')}}">
             Giảng viên
         </a>
-        <a class="item">
+        <a class="item {{request()->is('customers*') ? 'active' : ''}}" href="{{route('customer.index')}}">
             Thông tin khách hàng
         </a>
         <a class="item {{request()->is('users*') ? 'active' : ''}}" href="{{route('user.index')}}">
