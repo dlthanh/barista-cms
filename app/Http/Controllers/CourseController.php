@@ -20,7 +20,15 @@ class CourseController extends Controller
 
     public function postCreate(Request $request)
     {
-        Course::create($request->all());
+        $data['date'] = $request->date;
+        $data['month'] = $request->month;
+        $data['year'] = $request->year;
+
+        $labels = explode(',', $request->label);
+        foreach ($labels as $label) {
+            $data['label'] = $label;
+            Course::create($data);
+        }
         return redirect()->route('course.index')->with('message', 'Thêm lịch khai giảng thành công');
     }
 

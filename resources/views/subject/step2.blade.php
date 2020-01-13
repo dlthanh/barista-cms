@@ -6,7 +6,7 @@
 
 @section('content')
     @if(count($errors) > 0)
-        <ul class="user-form--error">
+        <ul class="user-form--error">Thêm mới lịch khai giảng
             @foreach($errors->all() as $error)
                 <li class="ui red message">{!! $error !!}</li>
             @endforeach

@@ -27,7 +27,7 @@
                 <div class="ui selection dropdown">
                     <input type="hidden" name="month" required value="{{old('month')}}">
                     <i class="dropdown icon"></i>
-                    <div class="{{!old('month') ?? 'default'}}text">{{old('month', 'Tháng')}}</div>
+                    <div class="{{!old('month') ?? 'default'}} text">{{old('month', 'Tháng')}}</div>
                     <div class="menu">
                         <div class="item" data-value="1">1</div>
                         <div class="item" data-value="2">2</div>
