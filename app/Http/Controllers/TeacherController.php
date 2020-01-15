@@ -39,15 +39,15 @@ class TeacherController extends Controller
         Teacher::update($request->all());
         return redirect()->route('teacher.index')->with('message', 'Thêm giảng viên thành công');
     }
-    
+
     public function delete($id)
     {
         $teacher = Teacher::find($id);
         if(!isset($teacher))
         {
-            return redirect()->route('teacher.index')->with('message', 'Không tìm thấy giáo viên có ID = ' . $id);
+            return redirect()->route('teacher.index')->with('message', 'Không tìm thấy giảng viên có ID = ' . $id);
         }
         $teacher->delete();
-        $teacher->subjects->detach();
+        return redirect()->route('teacher.index')->with('message', 'Xóa thành công giảng viên "'. $teacher->name . '"');
     }
 }

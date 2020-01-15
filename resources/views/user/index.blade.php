@@ -21,7 +21,7 @@
                 <th>Tên đầy đủ</th>
                 <th>Email</th>
                 <th>Phân quyền</th>
-                <th colspan="2">Hành động</th>
+                <th colspan="3">Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -36,18 +36,29 @@
                         Người sở hữu
                     @elseif($user->permission == 1)
                         Administrator
-                    @else
+                    @elseif($user->permission == 2)
                         Editor
+                    @else
+                        Đã khóa
                     @endif
                 </td>
                 <td>
-                    @if($user->permission !== 0 && $user->permission !== 1)
+                    @if(auth()->user()->permission == 0 || $user->permission !== 0)
                         <a href="{{route('user.getUpdate', $user->id)}}">Sửa</a>
                     @endif
                 </td>
                 <td>
-                    @if($user->permission !== 0 && $user->permission !== 1)
-                        <a href="{{route('user.delete', $user->id)}}" class="delete-btn">Xóa</a>
+                    @if(auth()->user()->permission == 0 || $user->permission !== 0)
+                        @if($user->permission == 3)
+                            <a href="{{route('user.unlock', $user->id)}}" class="unlock-btn">Mở khóa</a>
+                        @else
+                            <a href="{{route('user.lock', $user->id)}}" class="lock-btn">Khóa</a>
+                        @endif
+                    @endif
+                </td>
+                <td>
+                    @if(auth()->user()->permission == 0 || $user->permission !== 0)
+                        <a href="{{route('user.delete', $user->id)}}" class="delete-btn delete-user">Xóa</a>
                     @endif
                 </td>
             </tr>

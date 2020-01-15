@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Session;
+use App\Models\Article;
 
 class UserController extends Controller
 {
@@ -84,5 +85,33 @@ class UserController extends Controller
         }
         $user->delete();
         return redirect()->route('user.index')->with('message', 'Xóa thành công người dùng '. $user->name);
+    }
+
+    public function lock($id)
+    {
+        $user = User::find($id);
+        if(!isset($user)) {
+            return redirect()->route('user.index')->with('message', 'Không tìm thấy người dùng có ID = '. $id);
+        }
+        $isUpdated = $user->update(['permission' => 3]);
+
+        if($isUpdated) {
+            return redirect()->route('user.index')
+                ->with('message', 'Khóa người dùng ' . $user->name . ' thành công');
+        }
+    }
+
+    public function unlock($id)
+    {
+        $user = User::find($id);
+        if(!isset($user)) {
+            return redirect()->route('user.index')->with('message', 'Không tìm thấy người dùng có ID = '. $id);
+        }
+        $isUpdated = $user->update(['permission' => 2]);
+
+        if($isUpdated) {
+            return redirect()->route('user.index')
+                ->with('message', 'Mở khóa người dùng ' . $user->name . ' thành công');
+        }
     }
 }

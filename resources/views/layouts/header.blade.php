@@ -24,7 +24,18 @@
             $('.ui.dropdown').dropdown();
 
             $('.delete-btn').click(function() {
-                return confirm('Bạn có xác định muốn xóa trường này');
+                if($(this).hasClass('delete-user')) {
+                    return confirm('Tất cả các bài viết, video được tạo bởi người dùng này sẽ bị xóa\nKHÓA người dùng nếu bạn muốn giữ lại toàn bộ dữ liệu\nBạn có xác nhận muốn XÓA người dùng này');    
+                }
+                return confirm('Bạn có xác định muốn XÓA bản ghi này');
+            });
+
+            $('.lock-btn').click(function() {
+                return confirm('Bạn có xác nhận muốn KHÓA người dùng này');
+            });
+
+            $('.unlock-btn').click(function() {
+                return confirm('Sau khi MỞ KHÓA người dùng sẽ phân quyền Editor\nBạn có xác nhận muốn MỞ KHÓA người dùng này');
             });
         })
     </script>
