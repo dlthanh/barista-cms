@@ -1,6 +1,6 @@
 <div class="nav">
     <div class="ui secondary vertical pointing menu">
-        <a class="item {{request()->is('/') ? 'active' : ''}}">
+        <a class="item {{request()->is('/') ? 'active' : ''}}" href="{{route('dashboard')}}">
             Bảng điều khiển
         </a>
         <a class="item {{request()->is('subjects*') ? 'active' : ''}}" href="{{route('subject.index')}}">
