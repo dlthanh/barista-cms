@@ -23,4 +23,19 @@ class TeacherController extends Controller
         Teacher::create($request->all());
         return redirect()->route('teacher.index')->with('message', 'Thêm giảng viên thành công');
     }
+
+    public function getUpdate($id)
+    {
+        $teacher = Teacher::find($id);
+        if(!isset($teacher)) {
+            return redirect()->route('teacher.index')->with('message', 'Không tìm thấy giảng viên có ID = '. $id);
+        }
+        return view('teacher.create');
+    }
+
+    public function postUpdate($id, Request $request)
+    {
+        Teacher::update($request->all());
+        return redirect()->route('teacher.index')->with('message', 'Thêm giảng viên thành công');
+    }
 }
