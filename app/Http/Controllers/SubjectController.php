@@ -126,7 +126,7 @@ class SubjectController extends Controller
         }
 
         $subject->teachers()->sync($request->teacher_id);
-        return view('subject.update', ['message' => 'Cập nhập khóa học thành công']);
+        return redirect()->route('subject.getUpdate', $id)->with('message', 'Cập nhập khóa học thành công');
     }
 
     public function delete($id)
