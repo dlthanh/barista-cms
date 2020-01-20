@@ -31,7 +31,7 @@ class TeacherController extends Controller
         if(!isset($teacher)) {
             return redirect()->route('teacher.index')->with('message', 'Không tìm thấy giảng viên có ID = '. $id);
         }
-        return view('teacher.create');
+        return view('teacher.update', ['teacher' => $teacher]);
     }
 
     public function postUpdate($id, Request $request)

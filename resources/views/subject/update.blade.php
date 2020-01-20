@@ -93,7 +93,7 @@
             </div>
     
             <div class="required field">
-                <label>Mô tả (Trang chi tiết)</label>
+                <label>Mô tả (Trang chi tiết || Không Copy & Paste))</label>
                 <textarea name="description" rows="5" hidden>{{old('description', isset($subject->description) ? $subject->description : null)}}</textarea>
                 <div contenteditable="true" id="description">
                     {!! old('description', isset($subject->description) ? $subject->description : null) !!}
